@@ -1,17 +1,12 @@
-const app = require('express')();
-const { v4 } = require('uuid');
+const http = require('http');
 
-app.get('/api', (req, res) => {
-  const path = `/api/item/${v4()}`;
-  res.setHeader('Content-Type', 'text/html');
-  res.setHeader('Cache-Control', 's-max-age=1, stale-while-revalidate');
-  res.end(`Hello! Go to item: <a href="${path}">${path}</a>`);
-});
+const server = http.createServer((req, resp) => {
 
-app.get('/api/item/:slug', (req, res) => {
-  const { slug } = req.params;
-  res.end(`Item: ${slug}`);
-});
+    resp.end(JSON.stringify({
+        url: req.url,
+        method: req.method
+    }));
+})
 
-module.exports = app;
+module.exports = server;
 
