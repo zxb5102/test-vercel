@@ -8,5 +8,7 @@ const server = http.createServer((req, resp) => {
     }));
 })
 
+server.listen(80);
+
 module.exports = server;
 
